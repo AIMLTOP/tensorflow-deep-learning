@@ -4,3 +4,9 @@
 .venv
 .ipynb_checkpoints
 .ipynb_checkpoints/
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/tensorflow-deep-learning.iml
+/.idea/vcs.xml
