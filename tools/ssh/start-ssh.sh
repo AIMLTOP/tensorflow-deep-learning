@@ -2,16 +2,15 @@
 
 echo "Setting up ssh with ngrok..."
 
-echo "Downloading ngrok..."
-#curl https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > ngrok.zip
-#unzip -o ngrok.zip
+echo "Setup ngrok..."
 curl https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz > ngrok.tgz
-tar -xvf ngrok.tgz
+tar -xvf ngrok.tgz && sudo mv ngrok /usr/bin/
+chown ec2-user:ec2-user /usr/bin/ngrok
 
-echo "Creating config file /home/ec2-user/SageMaker/.ngrok/config.yml..."
-mkdir -p /home/ec2-user/SageMaker/.ngrok
-if [[ ! -e /home/ec2-user/SageMaker/.ngrok/config.yml ]]; then
-    cat > /home/ec2-user/SageMaker/.ngrok/config.yml << EOF
+echo "Creating config file /home/ec2-user/SageMaker/.ngrok/ngrok.yml..."
+mkdir -p /home/ec2-user/SageMaker/ngrok
+if [[ ! -e /home/ec2-user/SageMaker/ngrok/ngrok.yml ]]; then
+    cat > /home/ec2-user/SageMaker/ngrok/ngrok.yml << EOF
 
 authtoken: $NGROK_AUTH_TOKEN
 
@@ -19,8 +18,10 @@ tunnels:
     ssh:
         proto: tcp
         addr: 22
+
+version: "2"
 EOF
-    chown -R ec2-user:ec2-user /home/ec2-user/SageMaker/.ngrok
+    chown -R ec2-user:ec2-user /home/ec2-user/SageMaker/ngrok
 fi
 
 # start-ngrok-ssh script
@@ -31,19 +32,18 @@ cat > /usr/bin/start-ngrok-ssh <<'EOF'
 set -e
 
 echo "Starting ngrok..."
-./ngrok start --all --log=stdout --config /home/ec2-user/SageMaker/.ngrok/config.yml > /var/log/ngrok.log &
-sleep 10
+ngrok start --all --log=stdout --config /home/ec2-user/SageMaker/ngrok/ngrok.yml > /home/ec2-user/SageMaker/ngrok/ngrok.log & sleep 10
 
-TUNNEL_URL=$(grep -Eo 'url=.+' /var/log/ngrok.log | cut -d= -f2)
+TUNNEL_URL=$(grep -Eo 'url=.+' /home/ec2-user/SageMaker/ngrok/ngrok.log | cut -d= -f2)
 if [[ -z $TUNNEL_URL ]]; then
     echo "Failed to set up ssh with ngrok"
     echo "Ngrok logs:"
-    cat /var/log/ngrok.log
+    cat /home/ec2-user/SageMaker/ngrok/ngrok.log
 fi
 
 echo "SSH address ${TUNNEL_URL}"
 
-cat > /home/ec2-user/SageMaker/SSH_INSTRUCTIONS <<EOD
+cat > /home/ec2-user/SageMaker/ngrok/SSH_TIPS <<EOD
 SSH enabled through ngrok!
 Address: ${TUNNEL_URL}
 
