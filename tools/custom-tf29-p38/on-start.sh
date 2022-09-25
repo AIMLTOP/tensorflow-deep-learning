@@ -16,7 +16,7 @@ set -e
 
 sudo -u ec2-user -i <<'EOF'
 unset SUDO_UID
-WORKING_DIR=/home/ec2-user/SageMaker/custom-tf29-p38/
+WORKING_DIR=/home/ec2-user/SageMaker/custom/tf29-p38
 source "$WORKING_DIR/miniconda/bin/activate"
 for env in $WORKING_DIR/miniconda/envs/*; do
     BASENAME=$(basename "$env")
