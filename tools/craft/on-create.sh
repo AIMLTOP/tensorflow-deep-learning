@@ -58,5 +58,73 @@ EOF
 
 EOD
 
+
+echo "Generate create-tf28-p38.sh ..."
+cat > /home/ec2-user/SageMaker/custom/create-tf28-p38.sh <<EOD
+#!/bin/bash
+
+set -e
+
+echo "Setup Custom Kernel ..."
+
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom/tf28-p38
+mkdir -p "\$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.11.0-Linux-x86_64.sh -O "\$WORKING_DIR/miniconda.sh"
+
+bash "\$WORKING_DIR/miniconda.sh" -b -u -p "\$WORKING_DIR/miniconda"
+rm -rf "\$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "\$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="tf28_p38"
+PYTHON="3.8"
+conda create --yes --name "\$KERNEL_NAME" python="\$PYTHON"
+conda activate "\$KERNEL_NAME"
+pip install --quiet ipykernel
+# Customize these lines as necessary to install the required packages
+conda install --yes tensorflow==2.8.2 tensorflow-datasets Pillow pandas numpy scipy
+pip install --quiet boto3 sagemaker
+conda install --yes matplotlib jupyter scikit-learn seaborn beautifulsoup4
+conda deactivate
+EOF
+
+EOD
+
+
+echo "Generate create-tf26-p38.sh ..."
+cat > /home/ec2-user/SageMaker/custom/create-tf26-p38.sh <<EOD
+#!/bin/bash
+
+set -e
+
+echo "Setup Custom Kernel ..."
+
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom/tf26-p38
+mkdir -p "\$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.11.0-Linux-x86_64.sh -O "\$WORKING_DIR/miniconda.sh"
+
+bash "\$WORKING_DIR/miniconda.sh" -b -u -p "\$WORKING_DIR/miniconda"
+rm -rf "\$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "\$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="tf26_p38"
+PYTHON="3.8"
+conda create --yes --name "\$KERNEL_NAME" python="\$PYTHON"
+conda activate "\$KERNEL_NAME"
+pip install --quiet ipykernel
+# Customize these lines as necessary to install the required packages
+conda install --yes tensorflow==2.6.2 tensorflow-datasets sagemaker
+conda install --yes Pillow pandas numpy scipy matplotlib jupyter scikit-learn seaborn beautifulsoup4
+conda deactivate
+EOF
+
+EOD
+
+
 sudo chmod +x /home/ec2-user/SageMaker/custom/*.sh
 sudo chown ec2-user:ec2-user /home/ec2-user/SageMaker/custom/ -R
