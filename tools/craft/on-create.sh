@@ -14,7 +14,9 @@ jupyter serverextension enable --py jupyterlab_s3_browser
 pip install jupyterlab-lsp
 pip install 'python-lsp-server[all]'
 jupyter server extension enable --user --py jupyter_lsp
-source deactivate
+
+sudo systemctl restart jupyter-server
+# source deactivate
 EOF
 
 mkdir -p /home/ec2-user/SageMaker/custom
