@@ -19,6 +19,10 @@ EOF
 
 mkdir -p /home/ec2-user/SageMaker/custom
 
+echo "Download prepareNotebook.sh ..."
+wget https://raw.githubusercontent.com/AIMLTOP/tensorflow-deep-learning/main/tools/prepareNotebook.sh -O /home/ec2-user/SageMaker/custom/prepareNotebook.sh
+
+
 echo "Generate create-tf29-p38.sh ..."
 cat > /home/ec2-user/SageMaker/custom/create-tf29-p38.sh <<EOD
 #!/bin/bash
@@ -92,6 +96,37 @@ EOF
 
 EOD
 
+echo "Generate create-tf27-p38.sh ..."
+cat > /home/ec2-user/SageMaker/custom/create-tf27-p38.sh <<EOD
+#!/bin/bash
+
+set -e
+
+echo "Setup Custom Kernel ..."
+
+sudo -u ec2-user -i <<'EOF'
+unset SUDO_UID
+# Install a separate conda installation via Miniconda
+WORKING_DIR=/home/ec2-user/SageMaker/custom/tf27-p38
+mkdir -p "\$WORKING_DIR"
+wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.11.0-Linux-x86_64.sh -O "\$WORKING_DIR/miniconda.sh"
+
+bash "\$WORKING_DIR/miniconda.sh" -b -u -p "\$WORKING_DIR/miniconda"
+rm -rf "\$WORKING_DIR/miniconda.sh"
+# Create a custom conda environment
+source "\$WORKING_DIR/miniconda/bin/activate"
+KERNEL_NAME="tf27_p38"
+PYTHON="3.8"
+conda create --yes --name "\$KERNEL_NAME" python="\$PYTHON"
+conda activate "\$KERNEL_NAME"
+pip install --quiet ipykernel
+# Customize these lines as necessary to install the required packages
+conda install --yes tensorflow==2.7.1 tensorflow-datasets sagemaker
+conda install --yes Pillow pandas numpy scipy matplotlib jupyter scikit-learn seaborn beautifulsoup4
+conda deactivate
+EOF
+
+EOD
 
 echo "Generate create-tf26-p38.sh ..."
 cat > /home/ec2-user/SageMaker/custom/create-tf26-p38.sh <<EOD
