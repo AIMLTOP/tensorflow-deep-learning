@@ -191,9 +191,9 @@ echo "==============================================="
 sh -c "$(curl -sSL https://git.io/install-kubent)"
 
 
-echo "==============================================="
-echo "  Install IAM Authenticator ......"
-echo "==============================================="
+#echo "==============================================="
+#echo "  Install IAM Authenticator ......"
+#echo "==============================================="
 ## https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
 ## curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/aws-iam-authenticator
 ## curl -o aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
@@ -366,19 +366,19 @@ source ~/.bashrc
 flink -v
 
 
-echo "==============================================="
-echo "  Install docker buildx ......"
-echo "==============================================="
-# https://aws.amazon.com/blogs/compute/how-to-quickly-setup-an-experimental-environment-to-run-containers-on-x86-and-aws-graviton2-based-amazon-ec2-instances-effort-to-port-a-container-based-application-from-x86-to-graviton2/
-# https://docs.docker.com/build/buildx/install/
-# export DOCKER_BUILDKIT=1
-# docker build --platform=local -o . git://github.com/docker/buildx
-DOCKER_BUILDKIT=1 docker build --platform=local -o . "https://github.com/docker/buildx.git"
-mkdir -p ~/.docker/cli-plugins
-mv buildx ~/.docker/cli-plugins/docker-buildx
-chmod a+x ~/.docker/cli-plugins/docker-buildx
-docker run --privileged --rm tonistiigi/binfmt --install all
-docker buildx ls
+#echo "==============================================="
+#echo "  Install docker buildx ......"
+#echo "==============================================="
+## https://aws.amazon.com/blogs/compute/how-to-quickly-setup-an-experimental-environment-to-run-containers-on-x86-and-aws-graviton2-based-amazon-ec2-instances-effort-to-port-a-container-based-application-from-x86-to-graviton2/
+## https://docs.docker.com/build/buildx/install/
+## export DOCKER_BUILDKIT=1
+## docker build --platform=local -o . git://github.com/docker/buildx
+#DOCKER_BUILDKIT=1 docker build --platform=local -o . "https://github.com/docker/buildx.git"
+#mkdir -p ~/.docker/cli-plugins
+#mv buildx ~/.docker/cli-plugins/docker-buildx
+#chmod a+x ~/.docker/cli-plugins/docker-buildx
+#docker run --privileged --rm tonistiigi/binfmt --install all
+#docker buildx ls
 
 
 echo "==============================================="
@@ -409,6 +409,13 @@ nvm install --lts
 node -e "console.log('Running Node.js ' + process.version)"
 npm install -g esbuild
 
+
+
+echo "==============================================="
+echo "  Set alias ......"
+echo "==============================================="
+echo "alias cds='cd /home/ec2-user/SageMaker'" | tee -a ~/.bashrc
+source ~/.bashrc
 
 # 最后再执行一次 source
 echo "source .bashrc"
