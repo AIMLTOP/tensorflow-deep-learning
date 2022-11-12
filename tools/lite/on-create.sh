@@ -8,7 +8,7 @@ sudo -u ec2-user -i <<'EOF'
 
 # conda install -c conda-forge nodejs
 
-# Kite 和 jupyterlab-lsp 二选一
+# Chose Kite or jupyterlab-lsp, Not Both
 # Kite Engine
 #bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
 yes "" | bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"

@@ -9,10 +9,11 @@ sudo -u ec2-user -i <<'EOF'
 
 # conda install -c conda-forge nodejs
 
-# Kite 和 jupyterlab-lsp 二选一
+# Chose Kite or jupyterlab-lsp, Not Both
 # Kite Engine
-#bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
+# https://github.com/kiteco/issue-tracker/issues/824
 yes "" | bash -c "$(wget -q -O - https://linux.kite.com/dls/linux/current)"
+
 
 source activate JupyterSystemEnv
 
@@ -50,7 +51,10 @@ sudo systemctl restart jupyter-server
 EOF
 
 echo "Create sh profile  ..."
+sudo -u ec2-user -i <<'EOF'
+
 echo "alias b='/bin/bash'" > ~/.profile
+EOF
 
 
 echo "Create custom folder ..."

@@ -14,7 +14,8 @@ EOF
 # without systemd, run /home/ec2-user/.local/share/kite/kited
 # or launch it using the Applications Menu
 
-systemctl restart jupyter-server
+echo "Restart jupyter-server ..."
+sudo systemctl restart jupyter-server
 
 echo "Generate start-tf29-p38.sh ..."
 cat > /home/ec2-user/SageMaker/custom/start-tf29-p38.sh <<EOD

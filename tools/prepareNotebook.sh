@@ -169,10 +169,10 @@ echo 'yq() {
 
 
 
-echo "==============================================="
-echo "  Install k9s a Kubernetes CLI To Manage Your Clusters In Style ......"
-echo "==============================================="
-curl -sS https://webinstall.dev/k9s | bash
+#echo "==============================================="
+#echo "  Install k9s a Kubernetes CLI To Manage Your Clusters In Style ......"
+#echo "==============================================="
+#curl -sS https://webinstall.dev/k9s | bash
 # 参考 https://segmentfault.com/a/1190000039755239
 
 
@@ -372,14 +372,14 @@ flink -v
 #docker buildx ls
 
 
-echo "==============================================="
-echo "  Install kmf ......"
-echo "==============================================="
-git clone https://github.com/awslabs/aws-kubernetes-migration-factory
-cd aws-kubernetes-migration-factory/
-sudo go build -o /usr/local/bin/kmf
-cd ..
-kmf -h
+#echo "==============================================="
+#echo "  Install kmf ......"
+#echo "==============================================="
+#git clone https://github.com/awslabs/aws-kubernetes-migration-factory
+#cd aws-kubernetes-migration-factory/
+#sudo go build -o /usr/local/bin/kmf
+#cd ..
+#kmf -h
 
 
 echo "==============================================="
