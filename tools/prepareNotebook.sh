@@ -263,15 +263,6 @@ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinu
 sudo yum install terraform -y
 terraform --version
 
-
-echo "==============================================="
-echo "  More Aliases ......"
-echo "==============================================="
-cat >> ~/.bashrc <<EOF
-alias c=clear
-EOF
-source ~/.bashrc
-
 echo "==============================================="
 echo "  Install Go ......"
 echo "==============================================="
@@ -410,12 +401,17 @@ node -e "console.log('Running Node.js ' + process.version)"
 npm install -g esbuild
 
 
-
 echo "==============================================="
-echo "  Set alias ......"
+echo "  Set Aliases ......"
 echo "==============================================="
+alias c=clear
+echo "alias b='/bin/bash'" | tee -a ~/.bashrc
 echo "alias cds='cd /home/ec2-user/SageMaker'" | tee -a ~/.bashrc
+echo "alias saj='source activate JupyterSystemEnv'" | tee -a ~/.bashrc
+echo "alias sd='source deactivate'" | tee -a ~/.bashrc
+
 source ~/.bashrc
+
 
 # 最后再执行一次 source
 echo "source .bashrc"
