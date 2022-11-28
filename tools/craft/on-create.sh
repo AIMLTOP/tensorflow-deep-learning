@@ -46,6 +46,8 @@ pip install jupyterlab-system-monitor
 # https://github.com/deshaw/jupyterlab-execute-time
 pip install jupyterlab_execute_time
 
+# jupyter server extension list
+
 sudo systemctl restart jupyter-server
 # source deactivate
 EOF
@@ -53,7 +55,8 @@ EOF
 echo "Create sh profile  ..."
 sudo -u ec2-user -i <<'EOF'
 
-echo "alias b='/bin/bash'" > ~/.profile
+echo "alias b='/bin/bash'" >> ~/.profile
+echo "export PATH=\$PATH:~/anaconda3/envs/JupyterSystemEnv/bin" >> ~/.profile
 EOF
 
 

@@ -394,17 +394,27 @@ sam --version
 echo "==============================================="
 echo "  Install nodejs ......"
 echo "==============================================="
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-source ~/.bashrc
-nvm install --lts
-node -e "console.log('Running Node.js ' + process.version)"
-npm install -g esbuild
+#v18 got error
+#node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by node)
+#node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by node)
+#nvm uninstall v18.12.1
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+#source ~/.bashrc
+##nvm install --lts
+#nvm install 16
+#node -e "console.log('Running Node.js ' + process.version)"
+#npm install -g esbuild
+
+## perfer yum
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
+sudo yum install nodejs gcc-c++ make -y
+
 
 
 echo "==============================================="
 echo "  Set Aliases ......"
 echo "==============================================="
-alias c=clear
+echo "alias c='clear'" | tee -a ~/.bashrc
 echo "alias b='/bin/bash'" | tee -a ~/.bashrc
 echo "alias cds='cd /home/ec2-user/SageMaker'" | tee -a ~/.bashrc
 echo "alias saj='source activate JupyterSystemEnv'" | tee -a ~/.bashrc
