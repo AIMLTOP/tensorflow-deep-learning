@@ -2,13 +2,14 @@
 
 All of the course materials for the [Zero to Mastery Deep Learning with TensorFlow course](https://dbourke.link/ZTMTFcourse).
 
-This course will teach you foundations of deep learning and TensorFlow as well as prepare you to pass the TensorFlow Developer Certification exam (optional).
+This course will teach you the foundations of deep learning and TensorFlow as well as prepare you to pass the TensorFlow Developer Certification exam (optional).
 
 ## Important links
 * 🎥 Watch the [first 14-hours of the course on YouTube](https://dbourke.link/tfpart1part2) (notebooks 00, 01, 02)
 * 📖 Read the [beautiful online book version of the course](https://dev.mrdbourke.com/tensorflow-deep-learning/)
 * 💻 [Sign up](https://dbourke.link/ZTMTFcourse) to the full course on the Zero to Mastery Academy (videos for notebooks 03-10)
 * 🤔 Got questions about the course? Check out the [livestream Q&A for the course launch](https://youtu.be/rqAqcFcfeK8)
+* 📝 Get a quick overview of TensorFlow with the [TensorFlow Cheatsheet](https://zerotomastery.io/cheatsheets/tensorflow-cheat-sheet/)
 
 ## Contents of this page
 - [Fixes and updates](https://github.com/mrdbourke/tensorflow-deep-learning#fixes-and-updates)
@@ -22,9 +23,16 @@ This course will teach you foundations of deep learning and TensorFlow as well a
 - [Log](https://github.com/mrdbourke/tensorflow-deep-learning#log) (updates, changes and progress)
 
 ## Fixes and updates 
+
+* 18 Aug 2023 - Update [Notebook 05](https://github.com/mrdbourke/tensorflow-deep-learning/blob/main/05_transfer_learning_in_tensorflow_part_2_fine_tuning.ipynb) to fix [#544](https://github.com/mrdbourke/tensorflow-deep-learning/issues/544) and [#553](https://github.com/mrdbourke/tensorflow-deep-learning/issues/553), see https://github.com/mrdbourke/tensorflow-deep-learning/discussions/575 for full notes
+     * In short, if you're using `tf.keras.applications.EfficientNetB0` and facing errors, swap to [`tf.keras.applications.efficientnet_v2.EfficientNetV2B0`](https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet_v2/EfficientNetV2B0)
+* 26 May 2023 - Update [Notebook 08](https://github.com/mrdbourke/tensorflow-deep-learning/blob/main/08_introduction_to_nlp_in_tensorflow.ipynb) for new version of TensorFlow + update [Notebook 09](https://github.com/mrdbourke/tensorflow-deep-learning/blob/main/09_SkimLit_nlp_milestone_project_2.ipynb) for new version of TensorFlow & spaCy, see update notes for 09: https://github.com/mrdbourke/tensorflow-deep-learning/discussions/557 
+* 19 May 2023 - Update [Notebook 07](https://github.com/mrdbourke/tensorflow-deep-learning/blob/main/07_food_vision_milestone_project_1.ipynb) for new version of TensorFlow + fix model loading errors (TensorFlow 2.13+ required), see: https://github.com/mrdbourke/tensorflow-deep-learning/discussions/550
+* 18 May 2023 - Update Notebook 06 for new TensorFlow namespaces (no major functionality change, just different imports), see: https://github.com/mrdbourke/tensorflow-deep-learning/discussions/549 
+* 12 May 2023 - Notebook 05 new namespaces added for `tf.keras.layers`, see https://github.com/mrdbourke/tensorflow-deep-learning/discussions/547, also add fix for issue with `model.load_weights()` in Notebook 05, see https://github.com/mrdbourke/tensorflow-deep-learning/issues/544, if you're having trouble saving/loading the model weights, also see https://github.com/mrdbourke/tensorflow-deep-learning/issues/553 
+* 12 May 2023 - Newer versions of TensorFlow (2.10+) use `learning_rate` instead of `lr` in `tf.keras.optimizers` (e.g. `tf.keras.optimizers.Adam(learning_rate=0.001)`, old `lr` still works but is deprecated
 * 02 Dec 2021 - Added fix for TensorFlow 2.7.0+ for notebook 02, [see discussion for more](https://github.com/mrdbourke/tensorflow-deep-learning/discussions/278)
 * 11 Nov 2021 - Added fix for TensorFlow 2.7.0+ for notebook 01,  [see discussion for more](https://github.com/mrdbourke/tensorflow-deep-learning/discussions/256)
-* 14 Aug 2021 - Added a [discussion with TensorFlow 2.6 updates and EfficientNetV2 notes](https://github.com/mrdbourke/tensorflow-deep-learning/discussions/166) 
 
 ## Course materials
 
@@ -138,7 +146,7 @@ You can find solutions to the exercises in [`extras/solutions/`](https://github.
 
 * [MIT introduction deep learning lecture 1](https://www.youtube.com/watch?v=7sB052Pz0sQ&ab_channel=AlexanderAmini) - gives a great overview of what's happening behind all of the code we're running.
 * Reading: 1-hour of [Chapter 1 of Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/chap1.html) by Michael Nielson - a great in-depth and hands-on example of the intuition behind neural networks.
-* To practice your regression modelling with TensorFlow, I'd also encourage you to look through [Lion Bridge's collection of datasets](https://lionbridge.ai/datasets/) or [Kaggle's datasets](https://www.kaggle.com/data), find a regression dataset which sparks your interest and try to model.
+* To practice your regression modelling with TensorFlow, I'd also encourage you to look through [Kaggle's datasets](https://www.kaggle.com/data), find a regression dataset which sparks your interest and try to model.
 
 ---
 
@@ -157,7 +165,7 @@ You can find solutions to the exercises in [`extras/solutions/`](https://github.
 ### 📖 02. Neural network classification with TensorFlow Extra-curriculum
 
 * Watch 3Blue1Brown's neural networks video 2: [*Gradient descent, how neural networks learn*](https://www.youtube.com/watch?v=IHZwWFHWa-w). After you're done, write 100 words about what you've learned.
-  * If you haven't already, watch video 1: [*But what is a Neural Network?*](https://www.youtube.com/watch?v=7sB052Pz0sQ&ab_channel=AlexanderAmini). Note the activation function they talk about at the end.
+  * If you haven't already, watch video 1: [*But what is a Neural Network?*](https://www.youtube.com/watch?v=aircAruvnKk). Note the activation function they talk about at the end.
 * Watch [MIT's introduction to deep learning lecture 1](https://youtu.be/njKP3FqW3Sk) (if you haven't already) to get an idea of the concepts behind using linear and non-linear functions.
 * Spend 1-hour reading [Michael Nielsen's Neural Networks and Deep Learning book](http://neuralnetworksanddeeplearning.com/index.html).
 * Read the [ML-Glossary documentation on activation functions](https://ml-cheatsheet.readthedocs.io/en/latest/activation_functions.html). Which one is your favourite?
@@ -408,7 +416,7 @@ Here are some of the main topics you might want to look into next:
 ## Extensions (possible places to go after the course)
 
 * [Neural Networks and Deep Learning Book](http://neuralnetworksanddeeplearning.com/) by Michael Nielsen - If the Zero to Mastery TensorFlow for Deep Learning course is top down, this book is bottom up. A fantastic resource to sandwich your knowledge. 
-* [Deeplearning.AI specializations](https://www.deeplearning.ai) - This course focuses on code-first, the deeplearning.ai specializations will teach you what's going on behind the code.
+* [Deeplearning.AI specializations](https://www.deeplearning.ai) - The ZTM TensorFLow course focuses on code-first, the deeplearning.ai specializations will teach you what's going on behind the code.
 * [Hands-on Machine Learning with Scikit-Learn, Keras and TensorFlow Book](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/) (especially the 2nd half) - Many of the materials in this course were inspired by and guided by the pages of this beautiful text book.
 * [Full Stack Deep Learning](https://fullstackdeeplearning.com) - Learn how to turn your models into machine learning-powered applications.
 * [Made with ML MLOps materials](https://madewithml.com/#mlops) - Similar to Full Stack Deep Learning but comprised into many small lessons around all the pieces of the puzzle (data collection, labelling, deployment and more) required to build a full-stack machine learning-powered application.
@@ -421,13 +429,15 @@ Contact [Daniel Bourke](mailto:daniel@mrdbourke.com) or [add a discussion](https
 
 ## Status
 
-As of: 14 Aug 2021
+As of: 12 May 2023
 
 Course completed! 🕺
 
 Any further updates/changes will be added below. 
   
 ## Log
+
+* 12 May 2023 - update several course notebooks for latest version of TensorFlow, several API updates for Notebook 05 here: https://github.com/mrdbourke/tensorflow-deep-learning/discussions/547
 * 02 Dec 2021 - add fix for TensorFlow 2.7 to notebook 02
 * 11 Nov 2021 - add fix for TensorFlow 2.7 to notebook 01
 * 14 Aug 2021 - added a discussion with TensorFlow 2.6 updates and EfficientNetV2 notes: https://github.com/mrdbourke/tensorflow-deep-learning/discussions/166
